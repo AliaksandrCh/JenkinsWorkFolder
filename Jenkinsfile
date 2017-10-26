@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Compile Stage') {
             steps {
-                sh 'mvn clean install -DskipTests'
+                sh 'mvn -Dmaven.test.failure.ignore=true clean install'
             }
         }
     }
