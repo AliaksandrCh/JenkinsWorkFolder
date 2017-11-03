@@ -1,14 +1,14 @@
 pipeline {
-    agent any
-    tools {
-        maven 'Maven 3.5.2'
-        jdk 'jdk8'
+    agent {
+        docker {
+            image 'maven:3-alpine' 
+            args '-v /root/.m2:/root/.m2' 
+        }
     }
-
     stages {
-        stage('Compile Stage') {
+        stage('Build') { 
             steps {
-                sh 'mvn clean install'
+                sh 'mvn -B -DskipTests clean package' 
             }
         }
     }
